@@ -39,7 +39,7 @@ page <- gsub("\\(Edit Section ↓)", "", page)
 page_split <- str_split(string = page, pattern = "Record of Sources Searched", simplify = TRUE) # split for accuracy of fields
 ##start extracting the fields for each MID
 mid_ID <- as.numeric(gsub(".*Dispute InformationMID #: |MID Name:.* ", "", page[1]))
-url <- paste0("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=MID.MID-0007")
+url <- paste0(i)
 mid_name <- gsub(".*MID Name: |Start Date:.*", "", page_split[, 1])
 start_date <- gsub(".*Start Date:|End Date:.*", "", page_split[, 1])
 end_date <- gsub(".*End Date: |Initiators?:.*", "", page_split[, 1])
