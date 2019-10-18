@@ -9,7 +9,7 @@ driver <- rD$client
 driver$open()
 driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=MID.MID")  
 webElem <- driver$findElement(using = "css selector", value = "p input")
-webElem$sendKeysToElement(list("castro200kgd")) #authenticate
+webElem$sendKeysToElement(list("####")) #authenticate
 webElem <- driver$findElement(using = "css selector", value = "input.inputbutton")
 webElem$clickElement()
 
@@ -67,7 +67,7 @@ temp_df <- as.data.frame(cbind(mid_ID, mid_name, start_date, end_date, initiator
                  mid_sources, narrative, non_state_actor_involvement, issue_description,
                  authority, disputed_facts, ultimatums_demands, notes, articles, search_records, url))
 
-final_df <- rbind(final_df, temp_df) %>% na.omit}
+final_df <- rbind(final_df, temp_df)}
 
 write_csv(final_df, "mids_scrape.csv")
 
