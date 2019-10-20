@@ -9,20 +9,75 @@ driver <- rD$client
 driver$open()
 driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=MID.MID")  
 webElem <- driver$findElement(using = "css selector", value = "p input")
-webElem$sendKeysToElement(list("####")) #authenticate
+webElem$sendKeysToElement(list("##")) #authenticate
 webElem <- driver$findElement(using = "css selector", value = "input.inputbutton")
 webElem$clickElement()
 
+
+counter_0999 <- 1:64
+counter_1999 <- 1:252
+counter_2999 <- 1:521
+counter_3999 <- 1:392
+counter_4000 <- 1:301
+
+
 #loop to grab MIDS urls for later scraping
-counter <- (1:1484)
-df <- list()
-for(i in counter){
-links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
-temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
-temp <- unique(temp)
-print(temp)
-df <- rbind(df, temp) 
-}
+df_0999 <- list()
+  driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=Main.MIDs0000-0999")  
+    for(i in counter_0999){
+      links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
+      temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
+      temp <- unique(temp)
+      print(temp)
+      df_0999 <- rbind(df_0999, temp) 
+    }
+
+
+df_1999 <- list()
+  driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=Main.MIDs1000-1999")  
+  for(i in counter_1999){
+    links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
+    temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
+    temp <- unique(temp)
+    print(temp)
+    df_1999 <- rbind(df_1999, temp) 
+  }
+
+df_2999 <- list()
+  driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=Main.MIDs2000-2999")  
+  for(i in counter_2999){
+    links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
+    temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
+    temp <- unique(temp)
+    print(temp)
+    df_2999 <- rbind(df_2999, temp) 
+  }
+
+df_3999 <- list()
+  driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=Main.MIDs3000-3999")  
+  for(i in counter_3999){
+    links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
+    temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
+    temp <- unique(temp)
+    print(temp)
+    df_3999 <- rbind(df_3999, temp) 
+  }
+
+
+df_4000 <- list()
+  driver$navigate("http://web.stanford.edu/group/tomzgroup/cgi-bin/pmwiki/index.php?n=Main.MIDs4000")
+  for(i in counter_4000){
+    links <- driver$findElement(using = "xpath", value = paste("//*[@id='wikitext']/ul/li[",i,"]/a", sep= ""))
+    temp <- unlist(lapply(links, function(x){links$getElementAttribute("href")}))
+    temp <- unique(temp)
+    print(temp)
+    df_4000 <- rbind(df_4000, temp) 
+  }
+  
+
+
+df <- rbind(df_0999, df_1999, df_2999, df_3999, df_4000)
+
 
 #filter out weird urls containing 'edit' in them
 df_1 <- Filter(function(x) !any(grepl("edit", x)), df)
